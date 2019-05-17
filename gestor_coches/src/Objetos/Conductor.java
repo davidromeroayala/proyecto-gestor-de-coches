@@ -9,19 +9,35 @@ import java.util.ArrayList;
 
 /**
  *
- * @author david
+ * @author david romero ayala 
  */
-public class Conductor extends Persona{
-    
-    private Vehiculo coche;
-    private ArrayList<Pasajero> vPasajeros;
+public class Conductor extends Persona {
 
-    public Conductor(Vehiculo coche, ArrayList<Pasajero> vPasajeros, String nombre, boolean carnet) {
-        super(nombre, carnet);
-        this.coche = coche;
-        this.vPasajeros = vPasajeros;
+    private Vehiculo coche;
+    private ArrayList<Persona> vPersona;
+
+    public Conductor(Vehiculo coche, ArrayList<Persona> vPersona, String dni, String nombre, String apellido, boolean vehiculo, String telefono) {
+        super(dni, nombre, apellido, vehiculo, telefono);
+        this.coche = new Vehiculo(coche.getMatricula(), coche.getMarca(), coche.getModelo(), coche.getPlazas());
+        this.vPersona = vPersona;
     }
-    
-    
-    
+
+    public Vehiculo getCoche() {
+        return new Vehiculo(coche.getMatricula(), coche.getMarca(), coche.getModelo(), coche.getPlazas());
+    }
+
+    public void setCoche(Vehiculo coche) {
+        this.coche = new Vehiculo(coche.getMatricula(), coche.getMarca(), coche.getModelo(), coche.getPlazas());
+    }
+
+    public ArrayList<Persona> getvPersona() {
+        return vPersona;
+    }
+
+    public void setvPersona(ArrayList<Persona> vPersona) {
+        this.vPersona = vPersona;
+    }
+
 }
+
+
