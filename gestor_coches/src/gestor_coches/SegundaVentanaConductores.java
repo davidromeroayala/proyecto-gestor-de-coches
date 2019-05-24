@@ -6,6 +6,7 @@
 package gestor_coches;
 
 import Objetos.Persona;
+import Objetos.Vehiculo;
 import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -174,7 +175,7 @@ String p = jLpersonas.getSelectedValue();
                 vConductores.add(persona);
                 itr.remove();
                 conductornuevo con;
-                vehiculo ve=con
+                Vehiculo ve=con;
             }
         }
      
