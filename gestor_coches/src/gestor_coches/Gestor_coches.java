@@ -19,7 +19,7 @@ public class Gestor_coches extends javax.swing.JFrame {
      */
     public Gestor_coches() {
         initComponents();
-       
+
     }
 
     /**
@@ -70,20 +70,24 @@ public class Gestor_coches extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBinicializarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBinicializarActionPerformed
-        
+
     }//GEN-LAST:event_jBinicializarActionPerformed
 
     private void jBinicializarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBinicializarMouseClicked
         try {
-             ArrayList<Persona> vPersonas=new ArrayList<Persona>();
-             vPersonas=Sql.sql.conectar();
-             System.out.println(vPersonas);
-             PrimeraVentanaPasajeros p = new PrimeraVentanaPasajeros(vPersonas);
-             p.setVisible(true);
-             this.dispose();
+            ArrayList<Persona> vPersonas = new ArrayList<>();
+            vPersonas = Sql.sql.conectar();
+            System.out.println(vPersonas);
+
+            PrimeraVentanaPasajeros primera = new PrimeraVentanaPasajeros(vPersonas);
+
+            primera.setLocationRelativeTo(null);
+            primera.setVisible(true);
+
+            this.dispose();
         } catch (Exception e) {
         }
-       
+
     }//GEN-LAST:event_jBinicializarMouseClicked
 
     /**

@@ -27,7 +27,7 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButton4" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBañadirnuevo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -79,8 +79,8 @@
                       <Component id="jScrollPane1" min="-2" pref="200" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jBañadir" min="-2" max="-2" attributes="0"/>
+                          <Component id="jBquitar" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -93,7 +93,7 @@
                       <EmptySpace pref="42" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jBsiguiente" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -115,9 +115,9 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                              <Component id="jBañadir" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                              <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jBquitar" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -149,14 +149,14 @@
                           <Component id="jTFtelefono" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButton4" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBañadirnuevo" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace pref="348" max="32767" attributes="0"/>
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jBsiguiente" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -172,20 +172,29 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="jBsiguiente">
       <Properties>
         <Property name="text" type="java.lang.String" value="siguiente"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBsiguienteMouseClicked"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="jBa&#xf1;adir">
       <Properties>
         <Property name="text" type="java.lang.String" value="a&#xf1;adir"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBa&#xf1;adirMouseClicked"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="jBquitar">
       <Properties>
         <Property name="text" type="java.lang.String" value="quitar"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBquitarMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -247,10 +256,13 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jTFtelefono">
     </Component>
-    <Component class="javax.swing.JButton" name="jButton4">
+    <Component class="javax.swing.JButton" name="jBa&#xf1;adirnuevo">
       <Properties>
         <Property name="text" type="java.lang.String" value="A&#xf1;adir Nuevo"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBa&#xf1;adirnuevoActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane3">
       <AuxValues>
@@ -259,7 +271,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JList" name="jList1">
+        <Component class="javax.swing.JList" name="jLgenteVa">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
               <StringArray count="5">

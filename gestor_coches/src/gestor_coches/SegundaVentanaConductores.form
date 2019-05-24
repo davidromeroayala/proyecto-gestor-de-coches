@@ -38,8 +38,8 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jButton2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jBañadir" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jBeliminar" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="214" max="-2" attributes="0"/>
@@ -53,7 +53,7 @@
                               <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jBcontinuar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -68,9 +68,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBañadir" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBeliminar" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
@@ -84,7 +84,7 @@
                           <Group type="102" attributes="0">
                               <Component id="jScrollPane2" min="-2" pref="207" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
-                              <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jBcontinuar" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -102,7 +102,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JList" name="jList1">
+        <Component class="javax.swing.JList" name="jLpersonas">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
               <StringArray count="5">
@@ -120,12 +120,15 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="jBa&#xf1;adir">
       <Properties>
         <Property name="text" type="java.lang.String" value="A&#xf1;adir"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBa&#xf1;adirMouseClicked"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="jBeliminar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Eliminar"/>
       </Properties>
@@ -137,7 +140,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JList" name="jList2">
+        <Component class="javax.swing.JList" name="jLconductores">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
               <StringArray count="5">
@@ -155,7 +158,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="jBcontinuar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Continuar"/>
       </Properties>

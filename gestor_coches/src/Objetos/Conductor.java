@@ -16,6 +16,17 @@ public class Conductor extends Persona {
     private Vehiculo coche;
     private ArrayList<Persona> vPersona;
 
+    public Conductor() {
+        super(null, null, null, false, null);
+    }
+
+ public Conductor(String dni, String nombre, String apellido, boolean vehiculo, String telefono) {
+        super(dni, nombre, apellido, vehiculo, telefono);
+        this.coche = null;
+        this.vPersona = new ArrayList<>();
+    }
+    
+    
     public Conductor(Vehiculo coche, ArrayList<Persona> vPersona, String dni, String nombre, String apellido, boolean vehiculo, String telefono) {
         super(dni, nombre, apellido, vehiculo, telefono);
         this.coche = new Vehiculo(coche.getMatricula(), coche.getMarca(), coche.getModelo(), coche.getPlazas());
@@ -37,6 +48,13 @@ public class Conductor extends Persona {
     public void setvPersona(ArrayList<Persona> vPersona) {
         this.vPersona = vPersona;
     }
+
+    @Override
+    public String toString() {
+        return this.getNombre();
+    }
+    
+    
 
 }
 

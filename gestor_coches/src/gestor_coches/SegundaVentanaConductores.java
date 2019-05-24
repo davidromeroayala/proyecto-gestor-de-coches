@@ -8,6 +8,7 @@ package gestor_coches;
 import Objetos.Persona;
 import java.awt.HeadlessException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.DefaultListModel;
 
 /**
@@ -15,28 +16,44 @@ import javax.swing.DefaultListModel;
  * @author david
  */
 public class SegundaVentanaConductores extends javax.swing.JFrame {
+
     private ArrayList<Persona> vPersonas;
     private DefaultListModel<String> mListaPersona;
+    private ArrayList<Persona> vConductores;
+    private DefaultListModel<String> mListaConductores;
     /**
      * Creates new form segundaVentana
      */
-    
-    
+    private void actualizar() {
+        mListaPersona.clear();
+        mListaConductores.clear();
+        for (Persona per : vPersonas) {
+            mListaPersona.addElement(per.toString());
+        }
+        for (Persona con : vConductores) {
+            mListaConductores.addElement(con.toString());
+        }
+    }
+
     public SegundaVentanaConductores() throws HeadlessException {
         initComponents();
     }
 
     public SegundaVentanaConductores(ArrayList<Persona> vPersonas) {
         initComponents();
-        this.vPersonas = (ArrayList<Persona>) vPersonas.clone();
-        mListaPersona = new DefaultListModel<String>();
-        
-        //jLpersonas.setModel(mListaPersona);
-        
-        
+        vConductores= new ArrayList<>();
+        this.vPersonas = new ArrayList<>();
         for (Persona per : vPersonas) {
-            mListaPersona.addElement(per.getNombre());
+            if (per.isVehiculo()) {
+                this.vPersonas.add(per);
+            }
         }
+        mListaPersona = new DefaultListModel<String>();
+        jLpersonas.setModel(mListaPersona);
+        mListaConductores = new DefaultListModel<String>();
+        jLconductores.setModel(mListaConductores);
+        actualizar();
+
     }
 
     /**
@@ -49,36 +66,41 @@ public class SegundaVentanaConductores extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jLpersonas = new javax.swing.JList<>();
+        jBañadir = new javax.swing.JButton();
+        jBeliminar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
-        jButton3 = new javax.swing.JButton();
+        jLconductores = new javax.swing.JList<>();
+        jBcontinuar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        jLpersonas.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(jLpersonas);
 
-        jButton1.setText("Añadir");
+        jBañadir.setText("Añadir");
+        jBañadir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBañadirMouseClicked(evt);
+            }
+        });
 
-        jButton2.setText("Eliminar");
+        jBeliminar.setText("Eliminar");
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+        jLconductores.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(jList2);
+        jScrollPane2.setViewportView(jLconductores);
 
-        jButton3.setText("Continuar");
+        jBcontinuar.setText("Continuar");
 
         jLabel6.setText("Conductores");
 
@@ -100,8 +122,8 @@ public class SegundaVentanaConductores extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(69, 69, 69)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jBañadir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBeliminar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(47, 47, 47)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(64, Short.MAX_VALUE))
@@ -112,7 +134,7 @@ public class SegundaVentanaConductores extends javax.swing.JFrame {
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(94, 94, 94))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton3)
+                                .addComponent(jBcontinuar)
                                 .addGap(134, 134, 134))))))
         );
         layout.setVerticalGroup(
@@ -121,9 +143,9 @@ public class SegundaVentanaConductores extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(83, 83, 83)
-                        .addComponent(jButton1)
+                        .addComponent(jBañadir)
                         .addGap(26, 26, 26)
-                        .addComponent(jButton2))
+                        .addComponent(jBeliminar))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -135,12 +157,30 @@ public class SegundaVentanaConductores extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(64, 64, 64)
-                                .addComponent(jButton3)))))
+                                .addComponent(jBcontinuar)))))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBañadirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBañadirMouseClicked
+String p = jLpersonas.getSelectedValue();
+
+       Iterator itr = vPersonas.iterator();     
+        while (itr.hasNext()) {
+            Persona persona = (Persona) itr.next();
+            if (persona.getNombre().equalsIgnoreCase(p)) {
+                vConductores.add(persona);
+                itr.remove();
+                conductornuevo con;
+                vehiculo ve=con
+            }
+        }
+     
+
+        actualizar();
+    }//GEN-LAST:event_jBañadirMouseClicked
 
     /**
      * @param args the command line arguments
@@ -179,13 +219,13 @@ public class SegundaVentanaConductores extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jBañadir;
+    private javax.swing.JButton jBcontinuar;
+    private javax.swing.JButton jBeliminar;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
+    private javax.swing.JList<String> jLconductores;
+    private javax.swing.JList<String> jLpersonas;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables

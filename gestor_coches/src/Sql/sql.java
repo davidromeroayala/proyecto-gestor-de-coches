@@ -5,6 +5,7 @@
  */
 package Sql;
 
+import Objetos.Conductor;
 import Objetos.Persona;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
@@ -39,9 +40,16 @@ public class sql {
             PreparedStatement ps = (PreparedStatement) conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery(sql);
             
-            while (rs.next()) {                
-                p=new Persona(rs.getString(1), rs.getString(2), rs.getString(3), rs.getBoolean(4), rs.getString(5));
-                vPersonas.add(p);
+            while (rs.next()) { 
+                boolean conductor = rs.getBoolean(4);
+                if (conductor){
+                    p = new Conductor(rs.getString(1), rs.getString(2), rs.getString(3), rs.getBoolean(4), rs.getString(5));
+                     vPersonas.add(p);
+                }else{
+                     p=new Persona(rs.getString(1), rs.getString(2), rs.getString(3), rs.getBoolean(4), rs.getString(5));
+                    vPersonas.add(p);
+                }
+               
             }
            
             
