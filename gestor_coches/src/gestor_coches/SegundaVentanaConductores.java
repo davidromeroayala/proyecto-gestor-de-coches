@@ -5,17 +5,38 @@
  */
 package gestor_coches;
 
+import Objetos.Persona;
+import java.awt.HeadlessException;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author david
  */
 public class SegundaVentanaConductores extends javax.swing.JFrame {
-
+    private ArrayList<Persona> vPersonas;
+    private DefaultListModel<String> mListaPersona;
     /**
      * Creates new form segundaVentana
      */
-    public SegundaVentanaConductores() {
+    
+    
+    public SegundaVentanaConductores() throws HeadlessException {
         initComponents();
+    }
+
+    public SegundaVentanaConductores(ArrayList<Persona> vPersonas) {
+        initComponents();
+        this.vPersonas = (ArrayList<Persona>) vPersonas.clone();
+        mListaPersona = new DefaultListModel<String>();
+        
+        //jLpersonas.setModel(mListaPersona);
+        
+        
+        for (Persona per : vPersonas) {
+            mListaPersona.addElement(per.getNombre());
+        }
     }
 
     /**
