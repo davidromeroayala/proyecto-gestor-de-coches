@@ -46,7 +46,7 @@ public class Conductor extends Persona {
     }
 
     public void setvPersona(ArrayList<Persona> vPersona) {
-        this.vPersona = vPersona;
+        this.vPersona = (ArrayList<Persona>)vPersona.clone();
     }
 
     @Override
@@ -60,9 +60,9 @@ public class Conductor extends Persona {
     public String plantilla(){
        int num=1;
         String txt="";
-       txt="Conductor:"+this.nombre+"/n";
+       txt="Conductor:"+this.nombre+"\n";
         for (Persona persona : vPersona) {
-            txt+="pasajero "+ persona.toString()+"/n";
+            txt+="pasajero "+num+ persona.toString()+"\n";
             num++;
         }
         return txt;

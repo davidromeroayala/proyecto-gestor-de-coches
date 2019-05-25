@@ -144,7 +144,7 @@ public class RepartirPasajeros extends javax.swing.JFrame {
             Persona persona = (Persona) itr.next();
             if (persona.getNombre().equalsIgnoreCase(pa)) {
                 Iterator it = vCondutores.iterator();
-                while (itr.hasNext()) {
+                while (it.hasNext()) {
                     Conductor con = (Conductor) it.next();
                     if (con.getNombre().equalsIgnoreCase(co)) {
                         
