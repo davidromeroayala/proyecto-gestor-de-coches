@@ -15,12 +15,14 @@ public class Vehiculo {
   private String modelo;
   private int plazas;
 
-    public Vehiculo(String matricula, String marca, String modelo, String plazas) {
+ public Vehiculo(String matricula, String marca, String modelo, int plazas) {
         this.matricula = matricula;
         this.marca = marca;
         this.modelo = modelo;
-        this.plazas = Integer.valueOf(plazas);
-    }
+        this.plazas = plazas;
+    }  
+
+ 
 
     public String getMatricula() {
         return matricula;

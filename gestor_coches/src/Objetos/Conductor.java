@@ -54,8 +54,19 @@ public class Conductor extends Persona {
         return this.getNombre();
     }
     
-    
-
+    public void añadir(Persona per){
+       vPersona.add(per);
+    }
+    public String plantilla(){
+       int num=1;
+        String txt="";
+       txt="Conductor:"+this.nombre+"/n";
+        for (Persona persona : vPersona) {
+            txt+="pasajero "+ persona.toString()+"/n";
+            num++;
+        }
+        return txt;
+    }
 }
 
 

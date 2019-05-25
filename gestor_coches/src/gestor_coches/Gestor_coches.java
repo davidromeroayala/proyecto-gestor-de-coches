@@ -76,7 +76,7 @@ public class Gestor_coches extends javax.swing.JFrame {
     private void jBinicializarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBinicializarMouseClicked
         try {
             ArrayList<Persona> vPersonas = new ArrayList<>();
-            vPersonas = Sql.sql.conectar();
+           /* vPersonas = Sql.sql.conectar();*/
             System.out.println(vPersonas);
 
             PrimeraVentanaPasajeros primera = new PrimeraVentanaPasajeros(vPersonas);

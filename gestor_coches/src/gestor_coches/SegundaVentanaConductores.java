@@ -5,6 +5,7 @@
  */
 package gestor_coches;
 
+import Objetos.Conductor;
 import Objetos.Persona;
 import Objetos.Vehiculo;
 import java.awt.HeadlessException;
@@ -19,15 +20,21 @@ import javax.swing.DefaultListModel;
 public class SegundaVentanaConductores extends javax.swing.JFrame {
 
     private ArrayList<Persona> vPersonas;
+    private ArrayList<Persona> vPersonasSintocar;
     private DefaultListModel<String> mListaPersona;
-    private ArrayList<Persona> vConductores;
+    private ArrayList<Conductor> vConductores;
     private DefaultListModel<String> mListaConductores;
+    Conductor con;
+
     /**
      * Creates new form segundaVentana
      */
     private void actualizar() {
-        mListaPersona.clear();
-        mListaConductores.clear();
+
+        mListaPersona = new DefaultListModel<String>();
+        mListaConductores = new DefaultListModel<String>();
+        jLpersonas.setModel(mListaPersona);
+        jLconductores.setModel(mListaConductores);
         for (Persona per : vPersonas) {
             mListaPersona.addElement(per.toString());
         }
@@ -36,23 +43,24 @@ public class SegundaVentanaConductores extends javax.swing.JFrame {
         }
     }
 
-    public SegundaVentanaConductores() throws HeadlessException {
+    public SegundaVentanaConductores() {
         initComponents();
+
     }
 
     public SegundaVentanaConductores(ArrayList<Persona> vPersonas) {
         initComponents();
-        vConductores= new ArrayList<>();
+        this.vPersonasSintocar = (ArrayList<Persona>) vPersonas.clone();
+        System.out.println(vPersonasSintocar);
+        this.vConductores = new ArrayList<>();
         this.vPersonas = new ArrayList<>();
         for (Persona per : vPersonas) {
             if (per.isVehiculo()) {
                 this.vPersonas.add(per);
             }
+
         }
-        mListaPersona = new DefaultListModel<String>();
-        jLpersonas.setModel(mListaPersona);
-        mListaConductores = new DefaultListModel<String>();
-        jLconductores.setModel(mListaConductores);
+
         actualizar();
 
     }
@@ -102,6 +110,11 @@ public class SegundaVentanaConductores extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jLconductores);
 
         jBcontinuar.setText("Continuar");
+        jBcontinuar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBcontinuarMouseClicked(evt);
+            }
+        });
 
         jLabel6.setText("Conductores");
 
@@ -120,23 +133,20 @@ public class SegundaVentanaConductores extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(94, 94, 94))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(69, 69, 69)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jBañadir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jBeliminar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(47, 47, 47)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(64, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(94, 94, 94))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jBcontinuar)
-                                .addGap(134, 134, 134))))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jBcontinuar)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(64, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,7 +167,7 @@ public class SegundaVentanaConductores extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(64, 64, 64)
+                                .addGap(66, 66, 66)
                                 .addComponent(jBcontinuar)))))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
@@ -166,22 +176,38 @@ public class SegundaVentanaConductores extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBañadirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBañadirMouseClicked
-String p = jLpersonas.getSelectedValue();
+        String p = jLpersonas.getSelectedValue();
 
-       Iterator itr = vPersonas.iterator();     
+        Iterator itr = vPersonas.iterator();
         while (itr.hasNext()) {
-            Persona persona = (Persona) itr.next();
+            Conductor persona = (Conductor) itr.next();
             if (persona.getNombre().equalsIgnoreCase(p)) {
+                Conductornuevo con = new Conductornuevo(persona);
                 vConductores.add(persona);
                 itr.remove();
-                conductornuevo con;
-                Vehiculo ve=con;
+
+                con.setVisible(true);
+                //this.setEnabled(false);
             }
         }
-     
-
+        Iterator it = vPersonasSintocar.iterator();
+        while (it.hasNext()) {
+            Persona con = (Persona) it.next();
+            if (con.getNombre().equalsIgnoreCase(p)) {
+            it.remove();    
+            }
+            
+           
+        
+        }
         actualizar();
     }//GEN-LAST:event_jBañadirMouseClicked
+
+    private void jBcontinuarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBcontinuarMouseClicked
+        Evento evento = new Evento(vConductores, vPersonasSintocar);
+        evento.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jBcontinuarMouseClicked
 
     /**
      * @param args the command line arguments
