@@ -182,7 +182,7 @@ public class SegundaVentanaConductores extends javax.swing.JFrame {
         while (itr.hasNext()) {
             Conductor persona = (Conductor) itr.next();
             if (persona.getNombre().equalsIgnoreCase(p)) {
-                Conductornuevo con = new Conductornuevo(persona);
+                Conductornuevo con=new Conductornuevo(persona);
                 vConductores.add(persona);
                 itr.remove();
 
