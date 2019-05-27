@@ -12,6 +12,7 @@ import Objetos.Vehiculo;
 /**
  *
  * @author alumno
+ * Modificacion
  */
 public class Conductornuevo extends javax.swing.JFrame {
 
