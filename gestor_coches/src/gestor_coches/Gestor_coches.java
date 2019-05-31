@@ -19,7 +19,7 @@ public class Gestor_coches extends javax.swing.JFrame {
      */
     public Gestor_coches() {
         initComponents();
-
+        this.setLocationRelativeTo(null);
     }
 
     /**

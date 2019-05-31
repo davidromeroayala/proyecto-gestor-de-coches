@@ -67,6 +67,14 @@ public class Conductor extends Persona {
         }
         return txt;
     }
+
+     public String imprimir(){
+         String texto="";
+         for (Persona persona : vPersona) {
+             texto+=persona.imprimir();
+         }
+   return "Conductor: "+" nombre: "+nombre+", apellido: "+apellido +"\n"+coche.toString()+texto+"\n";
+   }
 }
 
 

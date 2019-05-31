@@ -26,6 +26,7 @@ public class Evento extends javax.swing.JFrame {
 
     public Evento(ArrayList<Conductor> vConductores,ArrayList<Persona> vPersonas) {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.vConductores=(ArrayList<Conductor>)vConductores.clone();
         this.vPersonas=(ArrayList<Persona>)vPersonas.clone();
     }
@@ -130,8 +131,9 @@ public class Evento extends javax.swing.JFrame {
 
     private void jBGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBGuardarMouseClicked
         Viaje viaje=new Viaje(jTFnombre.getText(), jTFlugar.getText(), jDCida.getDate(), jDCvuelta.getDate(), vConductores);
-        RepartirPasajeros re=new RepartirPasajeros(vConductores, vPersonas);
-        re.setVisible(true);
+       RepartirPasajeros re =new RepartirPasajeros(vConductores, vPersonas, viaje);
+       re.setLocationRelativeTo(null);
+       re.setVisible(true);
         this.dispose();
 
 

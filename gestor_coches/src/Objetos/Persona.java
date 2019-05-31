@@ -72,6 +72,8 @@ public class Persona {
         return nombre ;
     }
   
-    
+   public String imprimir(){
+   return "pasajero: "+" nombre: "+nombre+", apellido: "+apellido +"\n";
+   } 
 
 }

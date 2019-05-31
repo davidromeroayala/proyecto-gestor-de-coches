@@ -24,7 +24,7 @@ public class Viaje {
         this.lugar = lugar;
         this.inicio = inicio;
         this.vuelta = vuelta;
-        this.vConductor = vConductor;
+        this.vConductor =(ArrayList<Conductor>) vConductor.clone();
     }
 
     public String getNombre() {
@@ -60,13 +60,26 @@ public class Viaje {
     }
 
     public ArrayList<Conductor> getvConductor() {
-        return vConductor;
+        ArrayList<Conductor> vConductor2;
+        return vConductor2=(ArrayList<Conductor>) vConductor.clone();
     }
 
     public void setvConductor(ArrayList<Conductor> vConductor) {
-        this.vConductor = vConductor;
+        this.vConductor =(ArrayList<Conductor>) vConductor.clone();
+    }
+
+    @Override
+    public String toString() {
+        return nombre  +"   "+ lugar + " Hora de  inicio= " + inicio + " Hora de vuelta= " + vuelta +"\n";
+        
     }
     
-    
+    public String plantilla(){
+        String texto="";
+        for (Conductor conductor : vConductor) {
+            conductor.imprimir();
+        }
+        return texto;
+    }
     
 }

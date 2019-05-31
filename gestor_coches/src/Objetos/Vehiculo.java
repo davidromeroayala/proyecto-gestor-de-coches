@@ -56,4 +56,9 @@ public class Vehiculo {
         this.plazas = plazas;
     }
 
+    @Override
+    public String toString() {
+        return "Vehiculo: " + " matricula= " + matricula + ", marca= " + marca + ", modelo= " + modelo + ", plazas= " + plazas + '\n';
+    }
+
 }

@@ -7,9 +7,20 @@ package gestor_coches;
 
 import Objetos.Conductor;
 import Objetos.Persona;
+import Objetos.Viaje;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -21,7 +32,49 @@ public class RepartirPasajeros extends javax.swing.JFrame {
     private ArrayList<Conductor> vCondutores;
     private DefaultListModel<String> mListaPersona;
     private DefaultListModel<String> mListaConductores;
+    private Viaje viaje;
     
+      private File ruta_destino = null;
+
+  
+        /* metodo que hace uso de la clase itext para manipular archivos PDF*/
+    public void crear_PDF() {
+        //abre ventana de dialogo "guardar"
+        Colocar_Destino();
+        
+        //si destino es diferente de null
+        if (this.ruta_destino != null) {
+            try {
+                // se crea instancia del documento
+                Document mipdf = new Document() {
+                };
+                // se establece una instancia a un documento pdf
+                PdfWriter.getInstance(mipdf, new FileOutputStream(this.ruta_destino + ".pdf"));
+                mipdf.open();// se abre el documento
+                mipdf.addTitle(viaje.toString()); // se añade el titulo
+                System.out.println(viaje.toString());
+                Paragraph para=new Paragraph(viaje.plantilla());
+                mipdf.add(para); // se añade el contendio del PDF
+                System.out.println(viaje.plantilla());
+                mipdf.close(); //se cierra el PDF
+                System.out.println("ya no se donde falla");
+                
+            } catch (DocumentException | FileNotFoundException ex) {
+                System.out.println("Fallo");
+            }
+        }
+    }
+
+    /* abre la ventana de dialogo Imprimir*/
+    public void Colocar_Destino() {
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivo PDF", "pdf", "PDF");
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(filter);
+        int result = fileChooser.showSaveDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            this.ruta_destino = fileChooser.getSelectedFile().getAbsoluteFile();
+        }
+    }
     private void actualizar() {
         mListaPersona.clear();
         mListaConductores.clear();
@@ -40,8 +93,9 @@ public class RepartirPasajeros extends javax.swing.JFrame {
         initComponents();
     }
     
-    public RepartirPasajeros(ArrayList<Conductor> vConductores, ArrayList<Persona> vPersonas) {
+    public RepartirPasajeros(ArrayList<Conductor> vConductores, ArrayList<Persona> vPersonas,Viaje viaje) {
         initComponents();
+        this.viaje=viaje;
         this.vPersonas = (ArrayList<Persona>) vPersonas.clone();
         this.vCondutores = (ArrayList<Conductor>) vConductores.clone();
         mListaPersona = new DefaultListModel<String>();
@@ -60,12 +114,16 @@ public class RepartirPasajeros extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFCruta = new javax.swing.JFileChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         jLpersonas = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jLconductores = new javax.swing.JList<>();
         jBañadir = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,39 +155,65 @@ public class RepartirPasajeros extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Pasajero");
+
+        jLabel2.setText("Conductor:");
+
+        jLabel3.setText("Seleccione un pasajero y el conductor con el que quiere ir a continuaccion haga click en añadir");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addComponent(jBañadir)
                         .addGap(40, 40, 40)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
                 .addGap(86, 86, 86))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(196, 196, 196))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel2)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(72, 72, 72)
                         .addComponent(jBañadir)))
-                .addGap(44, 44, 44)
-                .addComponent(jButton1)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(jButton1)
+                        .addContainerGap(54, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addGap(74, 74, 74))))
         );
 
         pack();
@@ -161,9 +245,8 @@ public class RepartirPasajeros extends javax.swing.JFrame {
     }//GEN-LAST:event_jBañadirMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        for (Conductor condu : vCondutores) {
-            System.out.println(condu.plantilla());
-        }
+       
+        crear_PDF();
     }//GEN-LAST:event_jButton1MouseClicked
 
     /**
@@ -204,6 +287,10 @@ public class RepartirPasajeros extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBañadir;
     private javax.swing.JButton jButton1;
+    private javax.swing.JFileChooser jFCruta;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JList<String> jLconductores;
     private javax.swing.JList<String> jLpersonas;
     private javax.swing.JScrollPane jScrollPane1;
